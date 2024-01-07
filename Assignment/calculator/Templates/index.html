@@ -1,0 +1,38 @@
+<!-- index.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    {% block content %}
+    <form method="post" action="{% url 'calculate' %}" id="calculator-form">
+        {% csrf_token %}
+        <div id="calculator-heading">Calculator</div>
+
+        <label for="operand1">Operand 1:</label>
+        <input type="number" name="operand1" id="operand1" class="form-control" placeholder="Enter integer or float" step="any" required>
+
+        <label for="operator">Operator:</label>
+        <select id="operator" name="operator" class="form-control" required>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+
+        <label for="operand2">Operand 2:</label>
+        <input type="number" name="operand2" id="operand2" class="form-control" placeholder="Enter integer or float" step="any" required>
+
+        <button type="submit">Calculate</button>
+
+        <label for="result">Result:</label>
+        <input type="text" name="result" id="result" class="form-control" placeholder="Result" readonly value="{{ result }}">
+    </form>
+    {% endblock %}
+</body>
+</html>
